@@ -34,3 +34,10 @@ class SwapChannel(commands.Cog):
             await ctx.send("You don't have permission to manage channels.")
         except discord.HTTPException as e:
             await ctx.send(f"An error occurred: {str(e)}")
+            
+    @commands.command()   
+    async def sendadmin(self, ctx, text: str):
+        admin_channel = get(ctx.guild.text_channels, name="admin-channel")
+        await admin_channel.send(text)
+        if text == "!swapchannel":
+            await self.swapchannel(admin_channel)
